@@ -1,14 +1,14 @@
 # TASK_TYPE must by FREQUENCY or VOLUME
-TASK_TYPE: 'VOLUME'
+TASK_TYPE: 'FREQUENCY'
 
 
-TRAINING_TRIALS: [{level: 0, n_trails: 2}, {level: 0, n_trails: 2}]
-START_LEVEL: 5
+TRAINING_TRIALS: [{level: 50, n_trails: 2}, {level: 20, n_trails: 2}]
+START_LEVEL: 50
 MAX_REVS: 3
 MAX_TRIALS: 20
 MIN_LEVEL: 3
 MAX_LEVEL: 60
-N_UP: 3
+STEP: 3
 
 # visual parameters
 TEXT_SIZE: 32
@@ -16,12 +16,12 @@ TEXT_SIZE: 32
 
 # sounds parameters
 ## WAVE_TYPE must by sin or white
-WAVE_TYPE: 'white'
+WAVE_TYPE: 'sin'
 VOLUME: 1
 
 
 ## Fix sound parameters
-PLAY_FIX_SOUND: TRUE
+PLAY_FIX_SOUND: FALSE
 GENERATE_FIX_SOUND: FALSE
 FIX_TIME: 0.1
 FIX_SAMPLE_RATE: 4100.0

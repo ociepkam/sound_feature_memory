@@ -96,6 +96,9 @@ def run_trial(n):
     acc = 0
 
     # play trial
+    help_line.setAutoDraw(True)
+    window.flip()
+
     if config['PLAY_FIX_SOUND']:
         play_sound(join('sounds', 'fixsound.wav'), volume=config['VOLUME'])
         time.sleep(config['S_TIME'])
@@ -106,8 +109,6 @@ def run_trial(n):
 
     play_sound(sounds[1][0], sounds[1][1])
     response_clock.reset()
-    help_line.setAutoDraw(True)
-    window.flip()
 
     while response_clock.getTime() < stim_time:
         check_exit()
@@ -138,8 +139,8 @@ for elem in config['TRAINING_TRIALS']:
 # EXPERIMENT
 show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['TEXT_SIZE'], screen_width=SCREEN_RES[0])
 
-experiment = NUpNDown(start_val=config['START_LEVEL'], max_revs=config['MAX_REVS'], n_up=config['STEP'],
-                      min_level=config["MIN_LEVEL"], max_level=config['MAX_LEVEL'])
+experiment = NUpNDown(start_val=config['START_LEVEL'], max_revs=config['MAX_REVS'], step_up=config['STEP'],
+                      step_down=config['STEP'], min_level=config["MIN_LEVEL"], max_level=config['MAX_LEVEL'])
 
 old_rev_count_val = -1
 for i, soa in enumerate(experiment, i):
@@ -154,7 +155,7 @@ for i, soa in enumerate(experiment, i):
     else:
         rev_count_val = '-'
 
-    RESULTS.append([config['TRAINING_TRIALS'] + i, 1, acc, rt, stim_time, n, reversal, rev_count_val])
+    RESULTS.append([i, 1, acc, rt, stim_time, n, reversal, rev_count_val])
     experiment.set_corr(acc)
 
 show_info(window, join('.', 'messages', "end.txt"), text_size=config['TEXT_SIZE'], screen_width=SCREEN_RES[0])
