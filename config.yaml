@@ -2,13 +2,13 @@
 TASK_TYPE: 'FREQUENCY'
 
 
-TRAINING_TRIALS: [{level: 50, n_trails: 2}, {level: 20, n_trails: 2}]
-START_LEVEL: 50
+TRAINING_TRIALS: [{level: 100, n_trails: 0}, {level: 50, n_trails: 0}]
+START_LEVEL: 60
 MAX_REVS: 3
 MAX_TRIALS: 20
-MIN_LEVEL: 3
-MAX_LEVEL: 60
-STEP: 3
+MIN_LEVEL: 400
+MAX_LEVEL: 10
+STEP: 10
 
 # visual parameters
 TEXT_SIZE: 32
@@ -17,7 +17,7 @@ TEXT_SIZE: 32
 # sounds parameters
 ## WAVE_TYPE must by sin or white
 WAVE_TYPE: 'sin'
-VOLUME: 1
+VOLUME: 0.5
 
 
 ## Fix sound parameters
@@ -31,12 +31,12 @@ DELAY: 1
 
 ## Standard sound parameters
 GENERATE_STANDART_SOUND: True
-S_TIME: 0.1
+S_TIME: 0.3
 S_SAMPLE_RATE: 44100.0
 S_FREQUENCY: 440.0
 
 ISI: 1
 
-RTIME: 1
+RTIME: 5
 
 JITTER_TIME: 1

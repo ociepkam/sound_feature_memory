@@ -21,7 +21,7 @@ class NUpNDown(AbstractAdaptive):
         """
 
         # Some vals must be positive, check if that true.
-        assert all(map(lambda x: x > 0, [n_up, n_down, max_revs, step_up])), 'Illegal init value'
+        # assert all(map(lambda x: x > 0, [n_up, n_down, max_revs, step_up])), 'Illegal init value'
         self.n_up = n_up
         self.n_down = n_down
         self.max_revs = max_revs
@@ -75,12 +75,12 @@ class NUpNDown(AbstractAdaptive):
             self.no_incorr_in_a_row += 1
 
         # check if it's time to change returned value
-        if self.n_up == self.no_corr_in_a_row and self.curr_val < self.max_level:
-            self.curr_val += self.step_up
+        if self.n_up == self.no_corr_in_a_row and self.curr_val > self.max_level:
+            self.curr_val -= self.step_up
             jump = 1  # mean increase
 
-        if self.n_down == self.no_incorr_in_a_row and self.curr_val > self.min_level:
-            self.curr_val -= self.step_down
+        if self.n_down == self.no_incorr_in_a_row and self.curr_val < self.min_level:
+            self.curr_val += self.step_down
             jump = -1  # mean decrease
 
         if jump:  # check if jump was also a switch

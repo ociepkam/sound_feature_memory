@@ -118,7 +118,6 @@ def run_trial(n):
             resp = sounds[KEYS.index(keys[0])][2]
             acc = 1 if resp == higher else -1
             break
-
     help_line.setAutoDraw(False)
     window.flip()
     time.sleep(config['JITTER_TIME'])
