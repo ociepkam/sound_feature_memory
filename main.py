@@ -3,6 +3,7 @@ from psychopy import visual, event, core, logging
 import time
 import pygame
 from os.path import join
+from os import  remove, listdir
 import csv
 import random
 
@@ -68,14 +69,14 @@ def run_trial(n):
     if config['TASK_TYPE'] == 'FREQUENCY':
         if random.random() > 0.5:
             higher = 'comparison'
-            sound_generator(name=join('sounds', 'comparison.wav'), sample_rate=config['S_SAMPLE_RATE'],
+            sound_generator(name=join('sounds', 'comparison{}.wav'.format(i)), sample_rate=config['S_SAMPLE_RATE'],
                             duration=config['S_TIME'], frequency=config['S_FREQUENCY'] + n, wave_type=config['WAVE_TYPE'])
         else:
             higher = 'standard'
-            sound_generator(name=join('sounds', 'comparison.wav'), sample_rate=config['S_SAMPLE_RATE'],
+            sound_generator(name=join('sounds', 'comparison{}.wav'.format(i)), sample_rate=config['S_SAMPLE_RATE'],
                             duration=config['S_TIME'], frequency=config['S_FREQUENCY'] - n, wave_type=config['WAVE_TYPE'])
 
-        sounds = [(join('sounds', 'comparison.wav'), config['VOLUME'], "comparison"),
+        sounds = [(join('sounds', 'comparison{}.wav'.format(i)  ), config['VOLUME'], "comparison"),
                   (join('sounds', 'standard.wav'), config['VOLUME'], "standard")]
         random.shuffle(sounds)
     elif config['TASK_TYPE'] == 'VOLUME':
@@ -154,8 +155,11 @@ for i, soa in enumerate(experiment, i):
     else:
         rev_count_val = '-'
 
-    RESULTS.append([config['TRAINING_TRIALS'] + i, 1, acc, rt, stim_time, n, reversal, rev_count_val])
+    RESULTS.append([i, 1, acc, rt, stim_time, n, reversal, rev_count_val])
     experiment.set_corr(acc)
 
 show_info(window, join('.', 'messages', "end.txt"), text_size=config['TEXT_SIZE'], screen_width=SCREEN_RES[0])
 pygame.quit()
+
+for file in listdir('sounds'):
+    remove('sounds/'+file)
